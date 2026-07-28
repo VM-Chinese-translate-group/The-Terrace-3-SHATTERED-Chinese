@@ -3,7 +3,6 @@ from pathlib import Path, PurePosixPath
 from tempfile import TemporaryDirectory
 
 import requests
-from LangSpliter import split_and_process_all
 from paratranz_api import RETRYABLE_STATUS_CODES, ParaTranzClient
 from paratranz_json_split import (
     UploadFile,
@@ -73,29 +72,6 @@ def get_filelist(directory):
     )
 
 
-def handle_ftb_quests_snbt():
-    """Splits an FTB Quests source language file into uploadable JSON files."""
-    snbt_file = SOURCE_DIR / "config/ftbquests/quests/lang/en_us.snbt"
-    chapters_dir = SOURCE_DIR / "config/ftbquests/quests/chapters"
-    chapter_groups_file = SOURCE_DIR / "config/ftbquests/quests/chapter_groups.snbt"
-    output_json_dir = SOURCE_DIR / "kubejs/assets/quests/lang"
-
-    if not snbt_file.exists():
-        print("未检测到 FTB Quests 的 en_us.snbt 文件，跳过拆分步骤。")
-        return
-
-    print(f"检测到 SNBT 文件: {snbt_file}，将进行自动拆分...")
-    output_json_dir.mkdir(parents=True, exist_ok=True)
-    split_and_process_all(
-        source_lang_file=str(snbt_file),
-        chapters_dir=str(chapters_dir),
-        chapter_groups_file=str(chapter_groups_file),
-        output_dir=str(output_json_dir),
-        flatten_single_lines=False,
-    )
-    print("SNBT 文件已成功拆分为 JSON，准备上传。")
-
-
 def main():
     token = os.getenv("API_TOKEN", "")
     project_id_value = os.getenv("PROJECT_ID", "")
@@ -106,7 +82,6 @@ def main():
     except ValueError as error:
         raise ValueError("环境变量 PROJECT_ID 必须是整数。") from error
 
-    handle_ftb_quests_snbt()
     split_configs, _ = load_paratranz_config()
     split_sources = {
         SOURCE_DIR / Path(*config.path.parts) for config in split_configs

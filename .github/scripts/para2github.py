@@ -6,7 +6,6 @@ import sys
 from collections import OrderedDict
 from pathlib import Path, PurePosixPath
 
-from LangSpliter import merge_all_to_snbt
 from paratranz_api import ParaTranzClient
 from paratranz_json_split import (
     is_legacy_split_source,
@@ -289,46 +288,6 @@ def main() -> None:
         source_path = Path(*config.path.parts)
         save_translation(merged, source_path, path_redirects)
         print(f"已合并 ParaTranz JSON 分片：{config.path.as_posix()}")
-
-    # 在所有文件处理完毕后，如果检测到了 FTB Quests 文件，则执行合并
-    if ftb_quests_lang_dir and ftb_quests_lang_dir.exists():
-        print(f"\n检测到 FTB Quests 翻译文件，开始调用 LangSpliter 合并 SNBT 文件...")
-
-        # 定义输入和输出路径
-        json_dir = str(ftb_quests_lang_dir)
-        output_snbt_file = "CNPack/config/ftbquests/quests/lang/zh_cn.snbt"
-
-        # 新增 chapters 目录的定义
-        source_chapters_dir = "Source/config/ftbquests/quests/chapters"
-        output_chapters_dir = "CNPack/config/ftbquests/quests/chapters"
-
-        # 直接调用从 LangSpliter 导入的函数，并传入所有必需的参数
-        if os.path.isdir(source_chapters_dir):
-            print(f"检测到章节目录，将启用 custom_name/lore 更新功能...")
-            merge_all_to_snbt(
-                json_dir, output_snbt_file, source_chapters_dir, output_chapters_dir
-            )
-        else:
-            print(
-                f"未检测到章节目录 {source_chapters_dir}，将禁用 custom_name/lore 更新功能..."
-            )
-
-            # 如果源目录不存在，传入空字符串或None来禁用功能
-            merge_all_to_snbt(json_dir, output_snbt_file, "", "")
-
-        # 合并完成后，清除已合并的临时JSON文件所在的父目录
-        cleanup_dir = ftb_quests_lang_dir.parent
-
-        if cleanup_dir.exists() and cleanup_dir.is_dir():
-            try:
-                shutil.rmtree(cleanup_dir)
-                print(f"已成功清除临时文件夹及其内容：{cleanup_dir}")
-            except OSError as e:
-                print(f"错误：清除文件夹 {cleanup_dir} 时失败: {e}")
-        else:
-            print(f"警告：找不到要清理的目录 {cleanup_dir}。")
-
-        print(f"SNBT 合并完成，文件已生成于: {output_snbt_file}")
 
 
 if __name__ == "__main__":
