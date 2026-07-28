@@ -1,0 +1,1 @@
+execute in terrace:desert run tp @a 0 5 0

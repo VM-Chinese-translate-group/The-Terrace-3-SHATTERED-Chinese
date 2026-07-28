@@ -1,0 +1,43 @@
+{
+  "stats": {
+    "minecraft:used": {
+      "minecraft:barrier": 13,
+      "minecraft:white_stained_glass": 924,
+      "minecraft:blue_wool": 7
+    },
+    "minecraft:mined": {
+      "minecraft:blue_wool": 14,
+      "minecraft:short_grass": 1,
+      "minecraft:lime_stained_glass": 3,
+      "minecraft:white_stained_glass": 299,
+      "minecraft:spruce_planks": 4,
+      "minecraft:green_wool": 8,
+      "minecraft:grass_block": 2,
+      "minecraft:light_gray_stained_glass": 2
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 66176,
+      "minecraft:walk_one_cm": 217965,
+      "minecraft:leave_game": 13,
+      "minecraft:walk_under_water_one_cm": 67,
+      "minecraft:damage_taken": 630,
+      "minecraft:damage_dealt": 85,
+      "minecraft:play_time": 67802,
+      "minecraft:jump": 998,
+      "minecraft:time_since_death": 66152,
+      "minecraft:sprint_one_cm": 92560,
+      "minecraft:fall_one_cm": 13077,
+      "minecraft:total_world_time": 67802,
+      "minecraft:fly_one_cm": 383675,
+      "minecraft:walk_on_water_one_cm": 1230,
+      "minecraft:crouch_one_cm": 5779,
+      "minecraft:sneak_time": 2810,
+      "minecraft:deaths": 2
+    },
+    "minecraft:picked_up": {
+      "minecraft:white_stained_glass": 896,
+      "minecraft:barrier": 1
+    }
+  },
+  "DataVersion": 4671
+}

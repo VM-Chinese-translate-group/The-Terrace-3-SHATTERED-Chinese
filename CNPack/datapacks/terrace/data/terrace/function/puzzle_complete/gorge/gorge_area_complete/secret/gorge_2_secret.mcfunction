@@ -1,0 +1,4 @@
+
+execute as @n[tag=reset,tag=gorge_2_secret] if score @s puzzleCompleteCount matches 1 at @a run playsound block.copper_door.open master @p ~ ~ ~ 1 0.1
+execute as @n[tag=reset,tag=gorge_2_secret] if score @s puzzleCompleteCount matches 1 run summon item -6 6 123 {NoGravity:1b,Glowing:1b,PickupDelay:32767,Invulnerable:1b,Tags:["itemAnimation"],Item:{id:"minecraft:lime_stained_glass",count:1,components:{"minecraft:custom_name":{"color":"green","italic":false,"translate":"terrace.i18n.map.lime_crystal"},"minecraft:lore":[{"color":"gray","italic":false,"translate":"terrace.i18n.map.life_seems_to_gather_around_it"},{"color":"gray","italic":false,"translate":"terrace.i18n.map.wherever_it_rests_growth_soon"},{"color":"gray","italic":false,"translate":"terrace.i18n.map.follows"}],"minecraft:can_place_on":[{blocks:"lime_concrete"}]}}}
+execute as @n[tag=reset,tag=gorge_2_secret] if score @s puzzleCompleteCount matches 1 run scoreboard players set animTimer generalTimer -40

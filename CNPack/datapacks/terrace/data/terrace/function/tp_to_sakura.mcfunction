@@ -1,0 +1,1 @@
+execute in terrace:sakura run tp @a 0 0 0

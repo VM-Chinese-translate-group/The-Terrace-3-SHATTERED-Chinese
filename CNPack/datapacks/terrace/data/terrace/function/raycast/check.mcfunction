@@ -1,0 +1,5 @@
+execute if entity @e[distance=..7,tag=museum_1_push_reset,tag=completed] unless entity @e[distance=..7,tag=museum_2_push_reset,tag=completed] unless entity @e[distance=..7,tag=museum_3_push_reset,tag=completed] as @n[tag=reset,tag=museum_1_push_reset,tag=completed] at @s run return run function terrace:raycast/hit
+execute if entity @e[distance=..7,tag=museum_1_push_reset,tag=completed] if entity @e[distance=..7,tag=museum_2_push_reset,tag=completed] unless entity @e[distance=..7,tag=museum_3_push_reset,tag=completed] as @n[tag=reset,tag=museum_2_push_reset,tag=completed] at @s run return run function terrace:raycast/hit
+execute if entity @e[distance=..7,tag=museum_1_push_reset,tag=completed] if entity @e[distance=..7,tag=museum_2_push_reset,tag=completed] if entity @e[distance=..7,tag=museum_3_push_reset,tag=completed] as @n[tag=reset,tag=museum_3_push_reset,tag=completed] at @s run return run function terrace:raycast/hit
+
+execute as @n[tag=reset] if entity @s[tag=completed] at @s run function terrace:raycast/hit

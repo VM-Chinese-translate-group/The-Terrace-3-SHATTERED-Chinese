@@ -1,0 +1,1 @@
+execute in terrace:museum run tp @a 0 5 0

@@ -74,41 +74,6 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
-      - name: Parse Target Version from modpack.json
-        id: parse_version
-        run: |
-          MC_VERSION=$(jq -r '.mcVersion // empty' .github/configs/modpack.json)
-          LOADER=$(jq -r '.loader // empty' .github/configs/modpack.json)
-          echo "mc_version=$MC_VERSION" >> $GITHUB_ENV
-          echo "loader=$LOADER" >> $GITHUB_ENV
-
-      - name: Download latest VMTU matching version
-        if: ${{ env.mc_version != '' && env.loader != '' }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          mkdir -p ./CNPack/mods
-          
-          # 1. 获取最新 Release 的所有附件文件名
-          ASSETS=$(gh release view --repo vm-chinese-translate-group/VMTranslationUpdateMod --json assets --jq '.assets[].name')
-          
-          # 2. 转义版本号中的正则字符，再进行边界匹配
-          ESCAPED_VERSION=$(printf '%s' "$mc_version" | sed 's/[][\\.^$*+?{}|()]/\\&/g')
-          EXACT_FILE=$(printf '%s\n' "$ASSETS" | grep -Fi -- "$loader" | grep -E -- "${ESCAPED_VERSION}([^0-9]|$)" | head -n 1 || true)
-          
-          # 3. 根据匹配结果执行下载
-          if [ -z "$EXACT_FILE" ]; then
-            echo "Warning: No matching VMTU jar found for $mc_version and $loader"
-          else
-            echo "Successfully found exact match: $EXACT_FILE"
-            gh release download \
-              --repo vm-chinese-translate-group/VMTranslationUpdateMod \
-              --pattern "$EXACT_FILE" \
-              --dir ./CNPack/mods \
-              --clobber
-          fi
-
-
       - name: Get current datetime for tag
         id: datetime
         run: echo "datetime=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV

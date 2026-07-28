@@ -1,0 +1,18 @@
+execute as @a unless entity @s[nbt={Inventory:[{id:"minecraft:white_stained_glass",count:64}]}] run clear @s minecraft:white_stained_glass
+execute as @a unless entity @s[nbt={Inventory:[{id:"minecraft:white_stained_glass",count:64}]}] run give @s white_stained_glass[can_place_on=[{blocks:"#nylium"},{blocks:"bee_nest"},{blocks:"observer"},{blocks:"white_glazed_terracotta"},{blocks:"light_gray_glazed_terracotta"},{blocks:"gray_glazed_terracotta"},{blocks:"black_glazed_terracotta"},{blocks:"red_glazed_terracotta"},{blocks:"orange_glazed_terracotta"},{blocks:"lime_glazed_terracotta"},{blocks:"green_glazed_terracotta"},{blocks:"cyan_glazed_terracotta"},{blocks:"light_blue_glazed_terracotta"},{blocks:"blue_glazed_terracotta"},{blocks:"purple_glazed_terracotta"},{blocks:"magenta_glazed_terracotta"},{blocks:"white_terracotta"},{blocks:"light_gray_terracotta"},{blocks:"gray_glazed_terracotta"},{blocks:"brown_glazed_terracotta"},{blocks:"black_terracotta"},{blocks:"brown_terracotta"},{blocks:"red_terracotta"},{blocks:"orange_terracotta"},{blocks:"yellow_terracotta"},{blocks:"oxidized_copper_grate"},{blocks:"waxed_copper_block"},{blocks:"oxidized_chiseled_copper"},{blocks:"waxed_chiseled_copper"},{blocks:"waxed_exposed_copper"},{blocks:"waxed_exposed_chiseled_copper"},{blocks:"waxed_weathered_cut_copper"},{blocks:"waxed_cut_copper"},{blocks:"waxed_copper_grate"},{blocks:"waxed_copper_bulb"},{blocks:"waxed_weathered_copper"},{blocks:"waxed_exposed_copper_grate"},{blocks:"waxed_exposed_cut_copper"},{blocks:"waxed_exposed_copper_bulb"},{blocks:"waxed_oxidized_copper_bulb"},{blocks:"chiseled_resin_bricks"},{blocks:"smooth_stone"},{blocks:"white_stained_glass"},{blocks:"weathered_copper_grate"},{blocks:"waxed_weathered_chiseled_copper"},{blocks:"cyan_concrete_powder"},{blocks:"light_blue_concrete_powder"},{blocks:"blue_concrete_powder"},{blocks:"purple_concrete_powder"},{blocks:"magenta_concrete_powder"},{blocks:"pink_concrete_powder"}],custom_name={"italic":false,"translate":"terrace.i18n.map.puzzle_block"},lore=[{"color":"gray","italic":false,"translate":"terrace.i18n.map.can_be_placed_on"},{"color":"dark_gray","italic":false,"translate":"terrace.i18n.map.smooth_stone"},{"color":"dark_gray","italic":false,"translate":"terrace.i18n.map.puzzle_elements"}],tooltip_display={hidden_components:["can_place_on"]}] 64
+
+execute as @a unless entity @s[nbt={Inventory:[{id:"minecraft:golden_pickaxe"}]}] run clear @s minecraft:golden_pickaxe
+execute as @a unless entity @s[nbt={Inventory:[{id:"minecraft:golden_pickaxe"}]}] run give @s golden_pickaxe[unbreakable={},can_break=[{blocks:"white_stained_glass"}],tooltip_display={hidden_components:["unbreakable"]},custom_name={"italic":false,"translate":"terrace.i18n.map.puzzle_block_breaker"}] 1
+
+execute as @e[type=item,nbt={Item:{id:"minecraft:golden_pickaxe"}}] run kill @s
+
+execute as @e[type=item,nbt={Item:{id:"minecraft:nether_star"}}] as @p at @s run function terrace:raycast/start_raycast
+execute as @e[type=item,nbt={Item:{id:"minecraft:nether_star"}}] as @p run clear @s nether_star
+execute as @e[type=item,nbt={Item:{id:"minecraft:nether_star"}}] as @p run give @s nether_star[custom_name={"italic":false,"translate":"terrace.i18n.map.reset_puzzle"},lore=[{"color":"gray","italic":false,"translate":"terrace.i18n.map.drop_to_reset_puzzle_you_are_looking"},{"color":"gray","italic":false,"translate":"terrace.i18n.map.at_puzzle_must_be_completed"}]] 1
+execute as @e[type=item,nbt={Item:{id:"minecraft:nether_star"}}] run kill @s
+
+effect give @a haste infinite 100 true
+effect give @a minecraft:saturation infinite 100 true
+effect give @a minecraft:night_vision infinite 0 true
+
+execute as @a run attribute @s minecraft:block_interaction_range base set 6

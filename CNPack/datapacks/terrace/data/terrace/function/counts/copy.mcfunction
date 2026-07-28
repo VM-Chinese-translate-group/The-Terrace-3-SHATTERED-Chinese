@@ -1,0 +1,2 @@
+scoreboard players operation #copy cell.ID = @s cell.ID
+scoreboard players operation @e[type=marker,tag=counting,predicate=terrace:this_id,limit=1] cell.count = @e[type=marker,tag=counting,predicate=terrace:copy_id,limit=1] cell.count
